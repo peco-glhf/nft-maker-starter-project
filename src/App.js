@@ -1,4 +1,5 @@
 import './App.css';
+
 import NftUploader from './components/NftUploader/NftUploader';
 
 function App() {
