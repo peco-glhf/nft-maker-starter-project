@@ -13,6 +13,7 @@ const NftUploader = () => {
    * ユーザーのウォレットアドレスを格納するために使用する状態変数を定義します。
    */
   const [currentAccount, setCurrentAccount] = useState("");
+  const [text, setText] = useState("");
   /*この段階でcurrentAccountの中身は空*/
   console.log("currentAccount: ", currentAccount);
   const checkIfWalletIsConnected = async () => {
@@ -67,7 +68,7 @@ const NftUploader = () => {
 
   const askContractToMintNft = async (ipfs) => {
     const CONTRACT_ADDRESS =
-      "0x35558364D864EAAcE19c10d84437969F133eDf12";
+      "0x3ff9D3081b5D73371576f66Ea2a02649745D722F";
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -78,13 +79,20 @@ const NftUploader = () => {
           Web3Mint.abi,
           signer
         );
+        setText("Going to pop wallet now to pay gas...");
         console.log("Going to pop wallet now to pay gas...");
         let nftTxn = await connectedContract.mintIpfsNFT("sample",ipfs);
         console.log("Mining...please wait.");
+
+        setText("Mining...please wait.");
         await nftTxn.wait();
         console.log(
           `Mined, see transaction: https://goerli.etherscan.io/tx/${nftTxn.hash}`
         );
+        setText(
+          `Mined, see transaction: https://goerli.etherscan.io/tx/${nftTxn.hash}`
+        );
+        
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -147,6 +155,7 @@ const NftUploader = () => {
         ファイルを選択
         <input className="nftUploadInput" type="file" accept=".jpg , .jpeg , .png" onChange={imageToNFT} />
       </Button>
+      <p>{text}</p>
     </div>
   );
 };
