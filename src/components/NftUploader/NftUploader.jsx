@@ -141,7 +141,7 @@ const NftUploader = () => {
         <p>If you choose image, you can mint your NFT</p>
       )}
       <div className="title">
-        <h2>NFTアップローダー</h2>
+        <h2>NFTアップローダーア</h2>
       </div>
       <div className="nftUplodeBox">
         <div className="imageLogoAndText">
